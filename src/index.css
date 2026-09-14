@@ -12,6 +12,10 @@
     overflow-x: hidden;
   }
 
+  section[id] {
+    scroll-margin-top: 120px;
+  }
+
   body {
     @apply bg-bg text-text-primary font-body antialiased;
   }
