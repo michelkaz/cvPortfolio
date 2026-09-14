@@ -98,9 +98,9 @@ export default function Hero() {
           <div>
             <p
               ref={titleRef}
-              className="inline-flex items-center gap-2 rounded-full card-border bg-surface/70 px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-accent"
+              className="inline-flex max-w-full items-center gap-2 rounded-full card-border bg-surface/70 px-4 py-1.5 font-mono text-[10px] sm:text-xs uppercase tracking-wide sm:tracking-wider text-accent"
             >
-              {t.hero.badge}
+              <span className="text-balance">{t.hero.badge}</span>
             </p>
 
             <h1 ref={nameRef} className="mt-6 text-4xl sm:text-6xl font-semibold tracking-tight text-gradient">

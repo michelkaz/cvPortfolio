@@ -23,9 +23,9 @@ export default function Contact() {
 
   const validate = () => {
     const next = {}
-    if (!form.name.trim()) next.name = true
-    if (!EMAIL_RE.test(form.email.trim())) next.email = true
-    if (!form.message.trim() || form.message.trim().length < 5) next.message = true
+    if (!form.name.trim()) next.name = f.errorName
+    if (!EMAIL_RE.test(form.email.trim())) next.email = f.errorEmail
+    if (!form.message.trim()) next.message = f.errorMessage
     return next
   }
 
@@ -122,6 +122,7 @@ export default function Contact() {
                   }`}
                   placeholder={f.namePlaceholder}
                 />
+                {errors.name && <p className="mt-1.5 text-xs text-red-500">{errors.name}</p>}
               </div>
 
               <div>
@@ -139,6 +140,7 @@ export default function Contact() {
                   }`}
                   placeholder={f.emailPlaceholder}
                 />
+                {errors.email && <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>}
               </div>
 
               <div>
@@ -156,6 +158,7 @@ export default function Contact() {
                   }`}
                   placeholder={f.messagePlaceholder}
                 />
+                {errors.message && <p className="mt-1.5 text-xs text-red-500">{errors.message}</p>}
               </div>
 
               <Magnetic
@@ -186,8 +189,7 @@ export default function Contact() {
               </Magnetic>
 
               {status === 'success' && <p className="text-xs text-accent">{f.success}</p>}
-              {status === 'error' && <p className="text-xs text-red-500">{f.error}</p>}
-              {status === 'idle' && (
+              {(status === 'idle' || status === 'error') && (
                 <p className="text-xs text-text-secondary">
                   {f.note} {profile.email}.
                 </p>

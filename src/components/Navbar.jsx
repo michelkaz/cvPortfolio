@@ -53,6 +53,17 @@ export default function Navbar() {
 
   const handleNavClick = () => setOpen(false)
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
     <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}>
       <div className="max-w-6xl mx-auto px-5">
@@ -134,33 +145,56 @@ export default function Navbar() {
           </div>
         </div>
 
-        {open && (
-          <div className="lg:hidden mt-2 rounded-[1.75rem] bg-surface/95 backdrop-blur-xl card-border p-4 flex flex-col gap-1">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={handleNavClick}
-                className={`rounded-xl px-3 py-2.5 text-sm transition-colors ${
-                  activeId === item.id ? 'bg-accent/[0.08] text-ink font-medium' : 'text-text-secondary hover:text-ink hover:bg-black/[0.03]'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+      </div>
 
-            <div className="mt-2 flex items-center gap-2">
+      {open && (
+        <div className="lg:hidden fixed inset-0 z-[60] flex flex-col bg-bg/98 backdrop-blur-xl">
+          <div className="max-w-6xl mx-auto w-full px-5 pt-5">
+            <div className="flex items-center justify-between rounded-[1.75rem] px-4 sm:px-5 py-3 card-border bg-surface/70">
+              <a href="#top" onClick={handleNavClick} className="flex items-center gap-2 font-display font-semibold tracking-tight">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl accent-gradient text-sm font-bold text-white">
+                  MK
+                </span>
+              </a>
+              <button
+                type="button"
+                aria-label="Fermer le menu"
+                className="flex h-10 w-10 items-center justify-center rounded-xl card-border text-ink"
+                onClick={() => setOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+          </div>
+
+          <div className="flex-1 overflow-y-auto px-5 py-8 flex flex-col justify-center gap-8 max-w-6xl mx-auto w-full">
+            <nav className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={handleNavClick}
+                  className={`rounded-2xl px-4 py-3.5 text-lg font-display transition-colors ${
+                    activeId === item.id ? 'bg-accent/[0.08] text-ink font-medium' : 'text-text-secondary hover:text-ink hover:bg-black/[0.03]'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setLang('fr')}
-                className={`flex-1 rounded-xl py-2 font-mono text-xs card-border transition-colors ${lang === 'fr' ? 'bg-ink text-white' : 'text-text-secondary'}`}
+                className={`flex-1 rounded-xl py-2.5 font-mono text-xs card-border transition-colors ${lang === 'fr' ? 'bg-ink text-white' : 'text-text-secondary'}`}
               >
                 FR
               </button>
               <button
                 type="button"
                 onClick={() => setLang('en')}
-                className={`flex-1 rounded-xl py-2 font-mono text-xs card-border transition-colors ${lang === 'en' ? 'bg-ink text-white' : 'text-text-secondary'}`}
+                className={`flex-1 rounded-xl py-2.5 font-mono text-xs card-border transition-colors ${lang === 'en' ? 'bg-ink text-white' : 'text-text-secondary'}`}
               >
                 EN
               </button>
@@ -170,14 +204,14 @@ export default function Navbar() {
               href={profile.cv}
               download
               onClick={handleNavClick}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl accent-gradient px-4 py-2.5 text-sm font-medium text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-xl accent-gradient px-4 py-3.5 text-sm font-medium text-white"
             >
               <Download size={16} />
               {t.nav.downloadCv}
             </a>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   )
 }

@@ -17,10 +17,13 @@ export default function Reveal({ children, className = '', delay = 0, y = 28, x 
       return
     }
 
+    const isMobile = window.matchMedia('(max-width: 639px)').matches
+    const startX = isMobile ? 0 : x
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { opacity: 0, y, x },
+        { opacity: 0, y, x: startX },
         {
           opacity: 1,
           y: 0,
