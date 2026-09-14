@@ -65,13 +65,13 @@ export default function Navbar() {
   }, [open])
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'py-3' : 'py-5'}`}>
-      <div className="max-w-6xl mx-auto px-5">
-        <div
-          className={`flex items-center justify-between rounded-[1.75rem] px-4 sm:px-5 py-3 transition-all duration-300 ${
-            scrolled ? 'bg-surface/85 backdrop-blur-xl card-border shadow-[0_12px_40px_-16px_rgba(20,33,61,0.18)]' : 'bg-transparent'
-          }`}
-        >
+    <header className="fixed top-0 inset-x-0 z-50">
+      <div
+        className={`w-full bg-surface/95 backdrop-blur-xl transition-shadow duration-300 ${
+          scrolled ? 'shadow-[0_8px_30px_-14px_rgba(20,33,61,0.25)] border-b border-ink/[0.08]' : 'border-b border-ink/[0.05]'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-5 flex items-center justify-between py-4">
           <a href="#top" className="flex items-center gap-2 font-display font-semibold tracking-tight">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl accent-gradient text-sm font-bold text-white">
               MK
@@ -144,13 +144,12 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-
       </div>
 
       {open && (
         <div className="lg:hidden fixed inset-0 z-[60] flex flex-col bg-bg/98 backdrop-blur-xl">
-          <div className="max-w-6xl mx-auto w-full px-5 pt-5">
-            <div className="flex items-center justify-between rounded-[1.75rem] px-4 sm:px-5 py-3 card-border bg-surface/70">
+          <div className="w-full bg-surface/95 backdrop-blur-xl border-b border-ink/[0.08]">
+            <div className="max-w-6xl mx-auto px-5 flex items-center justify-between py-4">
               <a href="#top" onClick={handleNavClick} className="flex items-center gap-2 font-display font-semibold tracking-tight">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl accent-gradient text-sm font-bold text-white">
                   MK
